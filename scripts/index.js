@@ -54,7 +54,7 @@ const getCats = function (api, store) {
                 if (data.message === "ok") {
                     localStorage.setItem("cats", JSON.stringify(data.data));
                     catsData = [...data.data];
-                    updCards(data.data);
+                    updCards(data.data);                    
                 }
             })
     } else {
@@ -114,4 +114,3 @@ form.addEventListener("submit", (e) => {
             }
         })
 });
-

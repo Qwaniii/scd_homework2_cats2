@@ -1,4 +1,4 @@
-.login-wrapper {
+.info-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,12 +11,13 @@
     display: none;
 }
 
-.login-wrapper.active {
+.info-wrapper.active {
     display: flex;
 }
 
-.login {
-    width: calc(100% - 100px);
+.info {
+    width: calc(100% - 20px);
+    max-height: calc(100% - 20px);
     max-width: 600px;
     box-sizing: border-box;
     padding: 20px;
@@ -27,38 +28,23 @@
     display: none;
 }
 
-.login.active {
+.info.active {
     display: block;
 }
 
-.login h2 {
+.info h2 {
     text-align: center;
     margin: 0 0 20px;
 }
 
-.log-form {
+.info-form {
     display: grid;
-    grid-template-columns: 300px;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    /* check bottom justify-items? */
-    justify-content: center;
+    justify-items: center;
 }
 
-.log-form input {
-    text-align: center;
-}
-
-.log-form button {
-    width: 100px;
-    justify-self: center;
-}
-
-.log-form button:hover {
-    color: #fff;
-    background-color: #0006
-}
-
-.login-close {
+.info-close {
     width: max-content;
     position: absolute;
     top: 10px;
@@ -66,4 +52,13 @@
     cursor: pointer;
 }
 
+.info-img {
+    grid-row-end: span 5;
+    background: url(/img/cat.jpg) no-repeat center / cover;
+    padding: 100px;
+    border-radius: 100px;
+}
 
+.info-description {
+    grid-column-end: span 2;
+}
