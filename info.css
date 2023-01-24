@@ -19,6 +19,7 @@
     width: calc(100% - 20px);
     max-height: calc(100% - 20px);
     max-width: 600px;
+    overflow-y: auto;
     box-sizing: border-box;
     padding: 20px;
     background-color: #fff;

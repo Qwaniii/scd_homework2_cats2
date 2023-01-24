@@ -1,5 +1,7 @@
 @import url(login.css);
 @import url(info.css);
+@import url(delete.css);
+@import url(edit.css);
 
 body {
     margin: 0;
@@ -15,13 +17,17 @@ i {
     font-size: 1.5rem;
 }
 
+span {
+    pointer-events: none;
+}
+
 header, footer {
     height: 30px;
     display:flex;
     justify-content:space-between;
     align-items: center;
     padding: 20px;
-    box-shadow: 0 0 2px 0 #0002;
+    box-shadow: 0 0 2px 0 #0007;
 }
 
 main {
@@ -114,17 +120,18 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff8;
+    background-color: #fff5;
     backdrop-filter: blur(2px);
     transition: backdrop-filter .3s linear;
 }
 
 .card:hover {
-    transform: scale(1.13);
+    transform: scale(1.12);
 }
 
 .card:hover::before {
     backdrop-filter: blur(0);
+    transform: scale(1.2);
 }
 
 .like::after {

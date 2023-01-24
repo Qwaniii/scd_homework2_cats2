@@ -1,0 +1,60 @@
+.btn-edit {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(59, 59, 59, 0.205);
+}
+
+.btn-edit:hover {
+    background-color: rgba(44, 44, 44, 0.671);
+    color: rgb(255, 255, 255);;
+}
+
+.info-edit {
+    width: max-content;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    cursor: pointer;
+}
+
+/* ------ class edit для полей редактирования */
+
+.edit {
+    box-shadow: 0 0 2px 0 #444;
+
+}
+
+.edit:hover {
+    cursor: pointer;
+}
+
+/* кнопка save */
+
+.btn-save {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(59, 59, 59, 0.205);
+}
+
+.btn-save:hover {
+    background-color: rgba(44, 44, 44, 0.671);
+    color: rgb(255, 255, 255);;
+}
+
+.info-save {
+    width: max-content;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    cursor: pointer;
+}
