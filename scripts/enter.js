@@ -3,6 +3,7 @@
 let addBtnEnter = document.querySelector("#login");
 let popupFormLogin = document.querySelector("#login-form");
 let closePopupFormLogin = document.querySelector(".login-close");
+let loginWrapper = document.querySelector(".login-wrapper")
 
 // Функция проверки существования Куки
 
@@ -31,6 +32,8 @@ let clickBtnLogin = function(e) {
 let loginValue = function(name) {
     if (cookieExist()) {
         addBtnEnter.innerHTML = `Привет ${name}`;
+        addBtnEnter.classList.add("done");
+        addBtnEnter.classList.remove("enter");
     } else {
         addBtnEnter.innerHTML = "Войти"
         addBtnEnter.addEventListener("click", clickBtnLogin);
@@ -43,6 +46,20 @@ loginValue(cookieLoginValue);
 closePopupFormLogin.addEventListener("click", () => {
     popupFormLogin.classList.remove("active");
     popupFormLogin.parentElement.classList.remove("active");
+});
+
+document.addEventListener("keydown", (e) => {
+    if(e.code == "Escape") {
+        popupFormLogin.classList.remove("active");
+        popupFormLogin.parentElement.classList.remove("active");
+    }
+});
+
+loginWrapper.addEventListener("click", (e) => {
+    if (e.target.classList.contains("login-wrapper")) {
+        popupFormLogin.classList.remove("active");
+        popupFormLogin.parentElement.classList.remove("active");
+    }
 });
 
 // Форма авторизации

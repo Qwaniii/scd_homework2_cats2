@@ -7,7 +7,7 @@ const updCards = function (data) {
     data.forEach(function (cat) {
         if (cat.id) {
             let card = `<div class="${cat.favourite ? "card like" : "card"}" id="${cat.id}" style="background-image: url(${cat.img_link || "img/cat.jpg"})">
-                            <span>${cat.name}</span>
+                            <span class="nameCat">${cat.name}</span>
                         </div>`;
             main.innerHTML += card;
         }
@@ -21,12 +21,12 @@ const updCards = function (data) {
 }
 
 
-
 // работает с popup окном
 
 let addBtn = document.querySelector("#add");
 let popupForm = document.querySelector("#popup-form");
 let closePopupForm = document.querySelector(".popup-close");
+let popupWrapper = document.querySelector(".popup-wrapper")
 
 addBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -39,6 +39,20 @@ addBtn.addEventListener("click", (e) => {
 closePopupForm.addEventListener("click", () => {
     popupForm.classList.remove("active");
     popupForm.parentElement.classList.remove("active");
+});
+
+document.addEventListener("keydown", (e) => {
+    if(e.code == "Escape") {
+    popupForm.classList.remove("active");
+    popupForm.parentElement.classList.remove("active");
+    }
+});
+
+popupWrapper.addEventListener("click", (e) => {
+    if (e.target.classList.contains("popup-wrapper")) {
+    popupForm.classList.remove("active");
+    popupForm.parentElement.classList.remove("active");
+    }
 });
 
 // создаем экземпляр класса, для формы и добавление котика

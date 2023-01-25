@@ -31,8 +31,7 @@ class Api {
         return fetch(`${this.url}${this.name}/update/${id}`, {
             method: "PUT",
             headers: {
-                "Accept": "application/json",
-                "Content-Typa": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(body)
         });

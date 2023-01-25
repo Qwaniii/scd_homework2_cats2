@@ -13,6 +13,7 @@ let delCatBtn = document.querySelector(".info-delete");
 let editCatBtn = document.querySelector(".info-edit");
 let classForEdit = document.querySelectorAll(".forEdit")
 let saveCatBtn = document.querySelector(".info-save")
+let infoWrapper = document.querySelector(".info-wrapper")
 
 
 /*------ Добавляем слушателя события на тег main---------*/
@@ -36,10 +37,10 @@ main.addEventListener("click", (e) => {
 
     /* заполняем карточки */
     infoImg.style.backgroundImage = `url(${catsData[ind].img_link || "img/cat.jpg"})`;
-    infoId.innerHTML = `Порядковый номер (id) ${catsData[ind].id}`;
+    infoId.innerHTML = `Идентификационный номер ${catsData[ind].id}`;
     if (!catsData[ind].age) {
-        infoAge.innerHTML = "<span>Кот без возраста</span>"
-    } else if (catsData[ind].age < 5) {
+        infoAge.innerHTML = "Кот без возраста<span></span>"
+    } else if (catsData[ind].age < 5 && catsData[ind].age > 1) {
             infoAge.innerHTML = `Возраст <span>${catsData[ind].age}</span> года`
             } else if (catsData[ind].age >= 5) {
             infoAge.innerHTML = `Возраст <span>${catsData[ind].age}</span> лет`
@@ -50,13 +51,15 @@ main.addEventListener("click", (e) => {
     if (!catsData[ind].rate) {
         infoRate.innerHTML = "<span>Кот без рейтинга</span>"
     } else {
-        infoRate.innerHTML = "Рейтинг котика " + "*".repeat(`${catsData[ind].rate}`)};
+        let rate = "&#9733"
+        infoRate.innerHTML = `Рейтинг котика <span id="rate">${rate.repeat(catsData[ind].rate)}</span>`;
+    }
     if (!catsData[ind].description) {
-        infoDescr.innerHTML = "<span>Нет информации о котике...</span>"
+        infoDescr.innerHTML = `Нет информации о котике...<span></span>`
     } else {
-        infoDescr.innerHTML = `Немного информации о котике: <span>${catsData[ind].description}</span>`}
+        infoDescr.innerHTML = `Немного информации: <span>${(catsData[ind].description).toLowerCase()}</span>`}
     if (catsData[ind].favourite) {
-        infoFav.innerHTML = `${(catsData[ind].name).toUpperCase()} наш любимый кот`;
+        infoFav.innerHTML = `${(catsData[ind].name).toUpperCase()} наш любимый кот <i class="fa-solid fa-heart"></i>`;
     } else {
         infoFav.innerHTML = `${(catsData[ind].name).toUpperCase()} обычный кот`
     };
@@ -87,6 +90,7 @@ main.addEventListener("click", (e) => {
                     });
             };
 
+            /*---------- Кнопка редактирования -----------*/
 
     editCatBtn.addEventListener("click", makeEdit)
 
@@ -96,23 +100,105 @@ main.addEventListener("click", (e) => {
             let spanEdit = forEdit.firstElementChild
             if (!spanEdit.classList.contains("edit")) {
                 spanEdit.classList.add("edit")
-                spanEdit.setAttribute("contentEditable", true)
-                console.log(spanEdit)
+                spanEdit.setAttribute("contentEditable", true) //делае нужные поля - редактируемыми
             }
         })
+        editCatBtn.style.display = "none" 
+        saveCatBtn.style.display = "flex" // при нажатии на кнопка редактирования, появляется кнопка сохранения
+
     }
-    };
 
+    /*------------ кнопка сохранения -------------*/
 
-    /*--------------------------- вешаем событие на кнопку закрытия 
-    и удаляем событие с кнопки "удалить"------------------*/
+    saveCatBtn.addEventListener("click", makeSave);
+
+    function makeSave(e) {
+        e.preventDefault();
+        let bodyEdit = {};
+        let arr = ["name", "age", "description"];
+
+        /* -------- собираем новые данные, после редактирования, в объект --------*/
+
+        for (let i = 0; i < classForEdit.length; i++) {
+            let spanEdit = classForEdit[i].firstElementChild
+            if (isFinite(spanEdit.innerHTML)) {
+            bodyEdit[arr[i]] = +spanEdit.innerHTML
+            } else {
+                bodyEdit[arr[i]] = spanEdit.innerHTML
+            }
+            
+        }
+        console.log(bodyEdit)
+        /* ---- запускаем функцию обновления на сервер и на страницу -------*/
+
+        api.updCat(catId, bodyEdit)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.message === "ok") {
+                    closeInfoForm.click();
+                    alert("Изменения сохраненны")
+                    api.getCats()
+                    .then(res => res.json())
+                    .then(cat => {
+                        if (cat.message === "ok") {
+                            sessionStorage.setItem("cats", JSON.stringify(cat.data));
+                            catsData = [...cat.data];
+                            updCards(cat.data);
+                            console.log("Изменения сохранены на сервере и в sessionStorage...")
+                            console.log(cat.data);
+                        } else {
+                            console.log(cat);
+                        }
+                    })
+                } else {
+                    console.log(data);
+                    api.getIds().then(r => r.json()).then(d => console.log(d));
+                }
+        })
+    }
+}
+    /*--------------------------- вешаем событие на кнопку закрытия и escape
+    и удаляем событие с кнопки "удалить" и "редактировать"------------------*/
 
     closeInfoForm.addEventListener("click", () => {
         popupInfoForm.classList.remove("active");
         popupInfoForm.parentElement.classList.remove("active");
         delCatBtn.removeEventListener("click", delThisCat);
+        saveCatBtn.style.display = "none";
+        editCatBtn.style.display = "flex";
+        editCatBtn.removeEventListener("click", makeEdit)
+        saveCatBtn.removeEventListener("click", makeSave)
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if(e.code == "Escape") {
+            popupInfoForm.classList.remove("active");
+            popupInfoForm.parentElement.classList.remove("active");
+            delCatBtn.removeEventListener("click", delThisCat);
+            saveCatBtn.style.display = "none";
+            editCatBtn.style.display = "flex";
+            editCatBtn.removeEventListener("click", makeEdit)
+            saveCatBtn.removeEventListener("click", makeSave)
+        }
+    });
+
+    infoWrapper.addEventListener("click", (e) => {
+        if (e.target.classList.contains("info-wrapper")) {
+            popupInfoForm.classList.remove("active");
+            popupInfoForm.parentElement.classList.remove("active");
+            delCatBtn.removeEventListener("click", delThisCat);
+            saveCatBtn.style.display = "none";
+            editCatBtn.style.display = "flex";
+            editCatBtn.removeEventListener("click", makeEdit)
+            saveCatBtn.removeEventListener("click", makeSave)
+        }
     });
 });
+
+
+
+
 
 
 

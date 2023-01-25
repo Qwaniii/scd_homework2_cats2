@@ -13,6 +13,8 @@
 
 .login-wrapper.active {
     display: flex;
+    animation-name: fade;
+    animation-duration: .2s;
 }
 
 .login {
@@ -30,6 +32,8 @@
 
 .login.active {
     display: block;
+    animation-name: fade;
+    animation-duration: .2s;
 }
 
 .login h2 {
@@ -66,5 +70,6 @@
     right: 10px;
     cursor: pointer;
 }
+
 
 

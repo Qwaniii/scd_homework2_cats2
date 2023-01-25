@@ -65,10 +65,22 @@ main {
     align-items: center;
     border-radius: 15px;
     color: #fff;
+    transition: background-color .5s ease-out;
+    transition: color .5s ease-out;
 }
 
 .enter:hover {
     background-color: #aaa;
+    color: #000;
+}
+
+.done {
+    background-color: #aaa;
+    height: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
     color: #000;
 }
 
@@ -96,7 +108,7 @@ main {
 .card {
     padding: 20px;
     text-align: center;
-    background: url(/img/cat.jpg) no-repeat center / cover;
+    background: url(img/cat.jpg) no-repeat center / cover;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -123,6 +135,7 @@ main {
     background-color: #fff5;
     backdrop-filter: blur(2px);
     transition: backdrop-filter .3s linear;
+    transition: background-color .4s linear;
 }
 
 .card:hover {
@@ -130,12 +143,13 @@ main {
 }
 
 .card:hover::before {
+    background-color: rgba(255, 255, 255, 0);
     backdrop-filter: blur(0);
     transform: scale(1.2);
 }
 
 .like::after {
-    content: "\2665";
+    content: "\2764";
     font-size: 2rem;
     line-height: 1;
     position: absolute;
@@ -143,6 +157,15 @@ main {
     color: #f00;
     top: 10px;
     right: 10px;
+}
+
+.nameCat {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: rgba(29, 29, 29, 0.85);
+    position: absolute;
+    bottom: 10px;
+    
 }
 
 .popup-wrapper {
@@ -160,6 +183,13 @@ main {
 
 .popup-wrapper.active {
     display: flex;
+    animation-name: fade;
+    animation-duration: .2s;
+}
+
+@keyframes fade {
+    from {opacity: .1;}
+    to {opacity: 1;}
 }
 
 .popup {
@@ -178,6 +208,8 @@ main {
 
 .popup.active {
     display: block;
+    animation-name: fade;
+    animation-duration: .2s;
 }
 
 .popup-close {
@@ -215,7 +247,7 @@ form {
     grid-row-end: span 3;
     border-radius: 4px;
     box-shadow: 0 0 2px 0 #0004;
-    background: url("/img/cat.jpg") no-repeat center / cover;
+    background: url("img/cat.jpg") no-repeat center / cover;
 }
 
 input, textarea {
@@ -229,7 +261,7 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-    box-shadow: 0 0 5px 0 #0004;
+    box-shadow: 0 0 5px 0 rgba(228, 253, 0, 0.58);
 }
 
 input[type="checkbox"] {
@@ -262,10 +294,16 @@ form button {
     align-self: flex-end;
 }
 
+form button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 form button:active {
     background-color: #0006;
     color: #fff;
     box-shadow: 0 0 2px 0 #0004;
 }
+
+
 
 

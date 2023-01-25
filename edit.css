@@ -25,30 +25,37 @@
 /* ------ class edit для полей редактирования */
 
 .edit {
-    box-shadow: 0 0 2px 0 #444;
-
+    box-shadow: 0 0 1px 1px rgba(28, 0, 171, 0.528);
+    background-color: rgba(199, 199, 199, 0.486);
+    border-radius: 3px;
+    outline: none;
 }
 
-.edit:hover {
-    cursor: pointer;
+.edit:focus {
+    box-shadow: 0 0 2px 1px rgba(155, 198, 2, 0.528);
+    outline: none;
 }
+
+
 
 /* кнопка save */
 
 .btn-save {
-    min-width: 30px;
-    height: 30px;
+    min-width: 33px;
+    height: 33px;
     border-radius: 7px;
     display: none;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0);
-    color: rgba(59, 59, 59, 0.205);
+    background-color: rgb(146, 146, 146);
+    color: rgb(243, 243, 243);
+    transition: transform .3s ease-out;
 }
 
 .btn-save:hover {
+    transform: scale(1.2);
     background-color: rgba(44, 44, 44, 0.671);
-    color: rgb(255, 255, 255);;
+    color: rgb(255, 255, 255);
 }
 
 .info-save {
@@ -57,4 +64,12 @@
     top: 10px;
     left: 50px;
     cursor: pointer;
+}
+
+.info-img {
+    transition: transform .3s ease-out;
+}
+
+.info-img:hover {
+    transform: scale(1.12);
 }
