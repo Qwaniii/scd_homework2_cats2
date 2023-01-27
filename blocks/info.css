@@ -59,7 +59,7 @@
 
 .info-img {
     grid-row-end: span 5;
-    background: url(/img/cat.jpg) no-repeat center / cover;
+    background: url(..img/cat.jpg) no-repeat center / cover;
     padding: 100px;
     border-radius: 100px;
     padding-left: 150px;
