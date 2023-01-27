@@ -1,0 +1,143 @@
+@import url(login.css);
+@import url(card.css);
+@import url(info.css);
+@import url(delete.css);
+@import url(edit.css);
+@import url(form.css);
+@import url(addCat.css);
+
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+i {
+    font-size: 1.5rem;
+}
+
+span {
+    pointer-events: none;
+}
+
+header, footer {
+    position: relative;
+    height: 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 0 2px 0 #0007;
+}
+
+main {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-content: flex-start;
+    min-height: calc(100vh - 180px); 
+    
+}
+
+.btn {
+    min-width: 30px;
+    height: 30px;
+    box-shadow: 0 0 2px 0 #0002;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #444;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: #aaa;
+    color: #000;
+}
+
+/* кнопка входа */ 
+
+.enter {
+    background-color: #444;
+    height: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    color: #fff;
+    transition: background-color .5s ease-out;
+    transition: color .5s ease-out;
+}
+
+.enter:hover {
+    background-color: #aaa;
+    color: #000;
+}
+
+.done {
+    background-color: #aaa;
+    height: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    color: #000;
+}
+
+/* ---- кнопка выход ----*/
+
+.out {
+    display: none;
+    position: absolute;
+    right: 20px;
+    bottom: 1px; 
+    color:rgba(143, 143, 143, 0.8)
+}
+
+.out.visible {
+    display: block; 
+}
+
+.out.visible:hover {
+    color: rgba(105, 105, 105, 0.95)
+}
+
+
+/*------ for tablet and PC -------*/
+
+@media (min-width:768px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (min-width:1240px) {
+    main {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        min-height: calc(100vh - 280px);
+    }
+
+    main, header, footer {
+        padding: 30px calc(50% - 600px)
+    }
+
+    .out {
+        width: calc(50% - 550px);
+        right: 0;
+        bottom: 3px; 
+    }
+}
+
+
+
+
+

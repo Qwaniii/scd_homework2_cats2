@@ -1,0 +1,78 @@
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (min-width:768px) {
+
+    .popup {
+        padding: 30px;
+    }
+
+    form {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+.form-img {
+    grid-row-end: span 3;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 #0004;
+    background: url("/img/cat.jpg") no-repeat center / cover;
+}
+
+input, textarea {
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #0002;
+    height: 30px;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0 0 5px 0 rgba(228, 253, 0, 0.58);
+}
+
+input[type="checkbox"] {
+    width: initial;
+    height: initial;
+    box-sizing: initial;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+textarea {
+    height: 100%;
+    grid-row-end: span 2;
+    resize: vertical;
+}
+
+form button {
+    border: none;
+    border-radius: 4px;
+    background-color: #0002;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    height: 30px;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+
+form button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+form button:active {
+    background-color: #0006;
+    color: #fff;
+    box-shadow: 0 0 2px 0 #0004;
+}

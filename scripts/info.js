@@ -1,19 +1,19 @@
-let cards = document.querySelectorAll(".card")
-let popupInfoForm = document.querySelector("#info-form");
-let closeInfoForm = document.querySelector(".info-close");
-let infoImg = document.querySelector(".info-img");
-let infoId = document.querySelector(".info-id");
-let infoAge = document.querySelector(".info-age");
-let infoName = document.querySelector(".info-name");
-let infoRate = document.querySelector(".info-rate");
-let infoDescr = document.querySelector(".info-description");
-let infoFav = document.querySelector(".favourite");
-let span = document.querySelectorAll("span")
-let delCatBtn = document.querySelector(".info-delete");
-let editCatBtn = document.querySelector(".info-edit");
-let classForEdit = document.querySelectorAll(".forEdit")
-let saveCatBtn = document.querySelector(".info-save")
-let infoWrapper = document.querySelector(".info-wrapper")
+let cards = document.querySelectorAll(".card"),
+    popupInfoForm = document.querySelector("#info-form"),
+    closeInfoForm = document.querySelector(".info-close"),
+    infoImg = document.querySelector(".info-img"),
+    infoId = document.querySelector(".info-id"),
+    infoAge = document.querySelector(".info-age"),
+    infoName = document.querySelector(".info-name"),
+    infoRate = document.querySelector(".info-rate"),
+    infoDescr = document.querySelector(".info-description"),
+    infoFav = document.querySelector(".favourite"),
+    span = document.querySelectorAll("span"),
+    delCatBtn = document.querySelector(".info-delete"),
+    editCatBtn = document.querySelector(".info-edit"),
+    classForEdit = document.querySelectorAll(".forEdit"),
+    saveCatBtn = document.querySelector(".info-save"),
+    infoWrapper = document.querySelector(".info-wrapper");
 
 
 /*------ Добавляем слушателя события на тег main---------*/
@@ -24,16 +24,16 @@ main.addEventListener("click", (e) => {
     только по клику на картинку с классом .card --------*/
 
     if (e.target.classList.contains("card")) {
-        if (!popupInfoForm.classList.contains("active")) {
-        popupInfoForm.classList.add("active");
-        popupInfoForm.parentElement.classList.add("active");
-        }
+        if (!popupInfoForm.classList.contains("active") && cookieExist()) {  
+            popupInfoForm.classList.add("active");
+            popupInfoForm.parentElement.classList.add("active");
 
-    /*---------собираем ID и порядковый комер карточки (для сопоставления с БД catsData)
+            /*---------собираем ID и порядковый комер карточки (для сопоставления с БД catsData)
     для заполнения InfoForm и удаления кота---------*/
 
-    let ind = (e.target.classList[(e.target.classList).length - 1])
-    let catId = e.target.id
+    let target = e.target;
+    let ind = (target.classList[(target.classList).length - 1])
+    let catId = target.id
 
     /* заполняем карточки */
     infoImg.style.backgroundImage = `url(${catsData[ind].img_link || "img/cat.jpg"})`;
@@ -55,7 +55,7 @@ main.addEventListener("click", (e) => {
         infoRate.innerHTML = `Рейтинг котика <span id="rate">${rate.repeat(catsData[ind].rate)}</span>`;
     }
     if (!catsData[ind].description) {
-        infoDescr.innerHTML = `Нет информации о котике...<span></span>`
+        infoDescr.innerHTML = `Нет информации о котике...<span>&nbsp;</span>`
     } else {
         infoDescr.innerHTML = `Немного информации: <span>${(catsData[ind].description).toLowerCase()}</span>`}
     if (catsData[ind].favourite) {
@@ -100,7 +100,7 @@ main.addEventListener("click", (e) => {
             let spanEdit = forEdit.firstElementChild
             if (!spanEdit.classList.contains("edit")) {
                 spanEdit.classList.add("edit")
-                spanEdit.setAttribute("contentEditable", true) //делае нужные поля - редактируемыми
+                spanEdit.setAttribute("contentEditable", true) //делаем нужные поля - редактируемыми
             }
         })
         editCatBtn.style.display = "none" 
@@ -157,8 +157,16 @@ main.addEventListener("click", (e) => {
                 }
         })
     }
-}
-    /*--------------------------- вешаем событие на кнопку закрытия и escape
+
+
+        } else {
+            alert("Зарегестрируйтесь!")
+            clickBtnLogin();
+        }
+
+
+} 
+    /*--------------------------- вешаем событие закрытия на кнопку закрытия,  escape, и пустое место
     и удаляем событие с кнопки "удалить" и "редактировать"------------------*/
 
     closeInfoForm.addEventListener("click", () => {
@@ -194,15 +202,5 @@ main.addEventListener("click", (e) => {
             saveCatBtn.removeEventListener("click", makeSave)
         }
     });
+    
 });
-
-
-
-
-
-
-
-
-
-
-

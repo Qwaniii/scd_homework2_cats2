@@ -4,6 +4,7 @@ let addBtnEnter = document.querySelector("#login");
 let popupFormLogin = document.querySelector("#login-form");
 let closePopupFormLogin = document.querySelector(".login-close");
 let loginWrapper = document.querySelector(".login-wrapper")
+let outBtn = document.querySelector(".out");
 
 // Функция проверки существования Куки
 
@@ -20,7 +21,7 @@ let cookieLoginValue = document.cookie.replace(/(?:(?:^|.*;\s*)Login\s*\=\s*([^;
 // Функция открытия модального окна регистрации
 
 let clickBtnLogin = function(e) {
-        e.preventDefault();
+        // e.preventDefault();
         if (!popupFormLogin.classList.contains("active")) {
             popupFormLogin.classList.add("active");
             popupFormLogin.parentElement.classList.add("active");
@@ -34,6 +35,7 @@ let loginValue = function(name) {
         addBtnEnter.innerHTML = `Привет ${name}`;
         addBtnEnter.classList.add("done");
         addBtnEnter.classList.remove("enter");
+        outBtn.classList.add("visible")
     } else {
         addBtnEnter.innerHTML = "Войти"
         addBtnEnter.addEventListener("click", clickBtnLogin);
@@ -41,6 +43,8 @@ let loginValue = function(name) {
 };
 
 loginValue(cookieLoginValue);
+
+//закрытие формы входа, по кнопке, клавише эскейп и пустому месту.
 
 
 closePopupFormLogin.addEventListener("click", () => {
@@ -62,6 +66,7 @@ loginWrapper.addEventListener("click", (e) => {
     }
 });
 
+
 // Форма авторизации
 
 let formLogin = document.forms[1];
@@ -77,3 +82,13 @@ formLogin.addEventListener("submit", (e) => {
     loginValue(inpLogin);
     addBtnEnter.removeEventListener("click", clickBtnLogin);
 })
+
+//кнопка выхода с удалением кук
+
+outBtn.addEventListener("click", deleteCookie)
+
+function deleteCookie() {
+    document.cookie = `Login=;max-age=-1`;
+    document.cookie = `Password=;max-age=-1`;
+    location.reload();
+}
