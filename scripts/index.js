@@ -6,7 +6,7 @@ const updCards = function (data) {
     main.innerHTML = "";
     data.forEach(function (cat) {
         if (cat.id) {
-            let card = `<div class="${cat.favourite ? "card like" : "card"}" id="${cat.id}" style="background-image: url(${cat.img_link || "/img/cat.jpg"})">
+            let card = `<div class="${cat.favourite ? "card like" : "card"}" id="${cat.id}" style="background-image: url(${cat.img_link || "img/cat.jpg"})">
                             <span class="nameCat">${cat.name}</span>
                         </div>`;
             main.innerHTML += card;
@@ -45,7 +45,7 @@ closePopupForm.addEventListener("click", () => {
     popupForm.classList.remove("active");
     popupForm.parentElement.classList.remove("active");
     form.reset();
-    form.firstElementChild.style.backgroundImage = `url(/img/cat.jpg)`;
+    form.firstElementChild.style.backgroundImage = `url(img/cat.jpg)`;
 });
 
 //закрытие окна попап по кнопке Эксейп
@@ -55,6 +55,7 @@ document.addEventListener("keydown", (e) => {
     popupForm.classList.remove("active");
     popupForm.parentElement.classList.remove("active");
     form.reset();
+    form.firstElementChild.style.backgroundImage = `url(img/cat.jpg)`;
     }
 });
 
@@ -66,6 +67,7 @@ popupWrapper.addEventListener("click", (e) => {
     popupForm.classList.remove("active");
     popupForm.parentElement.classList.remove("active");
     form.reset();
+    form.firstElementChild.style.backgroundImage = `url(img/cat.jpg)`;
     }
 });
 
@@ -102,9 +104,9 @@ let form = document.forms[0];
 
 form.img_link.addEventListener("change", (e) => {
     if (e.target.value.length < 5) {
-        form.firstElementChild.style.backgroundImage = `url(/img/cat.jpg)`
+        form.firstElementChild.style.backgroundImage = `url(img/cat.jpg)`
     } else {
-    form.firstElementChild.style.backgroundImage = `url(${e.target.value || "/img/cat.jpg"})`
+    form.firstElementChild.style.backgroundImage = `url(${e.target.value || "img/cat.jpg"})`
     }
 });
 
@@ -144,7 +146,7 @@ form.addEventListener("submit", (e) => {
                             catsData.push(cat.data);
                             sessionStorage.setItem("cats", JSON.stringify(catsData));
                             getCats(api, catsData);
-                            form.firstElementChild.style.backgroundImage = `url(/img/cat.jpg)`;
+                            form.firstElementChild.style.backgroundImage = `url(img/cat.jpg)`;
                         } else {
                             console.log(cat);
                         }
