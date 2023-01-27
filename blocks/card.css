@@ -5,7 +5,7 @@
 .card {
     padding: 20px;
     text-align: center;
-    background: url(/img/cat.jpg) no-repeat center / cover;
+    background: url(..img/cat.jpg) no-repeat center / cover;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
