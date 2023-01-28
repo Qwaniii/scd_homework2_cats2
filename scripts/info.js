@@ -52,7 +52,8 @@ main.addEventListener("click", (e) => {
         infoRate.innerHTML = "<span>Кот без рейтинга</span>"
     } else {
         let rate = "&#9733"
-        infoRate.innerHTML = `Рейтинг котика <span id="rate">${rate.repeat(catsData[ind].rate)}</span>`;
+        let withOutRate = "&#9734"
+        infoRate.innerHTML = `Рейтинг котика <span id="rate">${rate.repeat(catsData[ind].rate)}${withOutRate.repeat(10 - catsData[ind].rate)}</span>`;
     }
     if (!catsData[ind].description) {
         infoDescr.innerHTML = `Нет информации о котике...<span>&nbsp;</span>`

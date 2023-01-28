@@ -20,7 +20,7 @@ form {
     grid-row-end: span 3;
     border-radius: 4px;
     box-shadow: 0 0 2px 0 #0004;
-    background: url("/img/cat.jpg") no-repeat center / cover;
+    background: url("../img/cat.jpg") no-repeat center / cover;
 }
 
 input, textarea {

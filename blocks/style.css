@@ -1,10 +1,12 @@
 @import url(login.css);
 @import url(card.css);
+@import url(form.css);
+@import url(addCat.css);
 @import url(info.css);
 @import url(delete.css);
 @import url(edit.css);
-@import url(form.css);
-@import url(addCat.css);
+
+
 
 
 body {
@@ -136,8 +138,3 @@ main {
         bottom: 3px; 
     }
 }
-
-
-
-
-
