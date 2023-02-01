@@ -1,4 +1,4 @@
-let cards = document.querySelectorAll(".card"),
+const cards = document.querySelectorAll(".card"),
     popupInfoForm = document.querySelector("#info-form"),
     closeInfoForm = document.querySelector(".info-close"),
     infoImg = document.querySelector(".info-img"),
@@ -13,7 +13,12 @@ let cards = document.querySelectorAll(".card"),
     editCatBtn = document.querySelector(".info-edit"),
     classForEdit = document.querySelectorAll(".forEdit"),
     saveCatBtn = document.querySelector(".info-save"),
-    infoWrapper = document.querySelector(".info-wrapper");
+    infoWrapper = document.querySelector(".info-wrapper"),
+    closeWindow = document.querySelector(".close-window"),
+    closeForm = document.querySelector("#close-form"),
+    delWindowBtn = document.querySelector("#del"),
+    cancelBtn = document.querySelector("#cancel"),
+    closeWindowWrapper = document.querySelector(".close_window-wrapper");
 
 
 /*------ Добавляем слушателя события на тег main---------*/
@@ -31,9 +36,9 @@ main.addEventListener("click", (e) => {
             /*---------собираем ID и порядковый комер карточки (для сопоставления с БД catsData)
     для заполнения InfoForm и удаления кота---------*/
 
-    let target = e.target;
-    let ind = (target.classList[(target.classList).length - 1])
-    let catId = target.id
+    const target = e.target;
+    const ind = (target.classList[(target.classList).length - 1])
+    const catId = target.id
 
     /* заполняем карточки */
     infoImg.style.backgroundImage = `url(${catsData[ind].img_link || "img/cat.jpg"})`;
@@ -69,14 +74,51 @@ main.addEventListener("click", (e) => {
     /*--------------- На открытой карточке, 
     добавляем событие на кнопку "удалить"-------------*/
 
-    delCatBtn.addEventListener("click", delThisCat)
+    delCatBtn.addEventListener("click", windowClose)
+
+    function windowClose(e) {
+        e.preventDefault();
+            if (!closeForm.classList.contains("active")) {
+                closeInfoForm.click();
+                closeForm.classList.add("active");
+                closeForm.parentElement.classList.add("active");
+                }
+            }
+
+    delWindowBtn.addEventListener("click", delThisCat);
+
+    cancelBtn.addEventListener("click", () => {
+        if (!popupInfoForm.classList.contains("active")) {  
+            popupInfoForm.classList.add("active");
+            popupInfoForm.parentElement.classList.add("active");
+            delWindowBtn.removeEventListener("click", delThisCat);
+            closeWindow.click();
+            classForEdit.forEach(forEdit => {
+                let spanEdit = forEdit.firstElementChild
+                if (spanEdit.classList.contains("edit")) {
+                    spanEdit.classList.remove("edit")
+                    spanEdit.setAttribute("contentEditable", false) //делаем нужные поля - нередактируемыми
+                }
+            })
+            saveCatBtn.addEventListener("click", makeSave);
+            editCatBtn.addEventListener("click", makeEdit);
+
+        }
+    })
+
+    closeWindow.addEventListener("click", () => {
+        closeForm.classList.remove("active");
+        closeForm.parentElement.classList.remove("active");
+        delWindowBtn.removeEventListener("click", delThisCat);
+    });
+
     function delThisCat(e) {
         e.preventDefault()
         api.delCat(catId) /* Id из cards id*/
             .then(res => res.json())
             .then(data => {
                 if (data.message === "ok") {
-                    closeInfoForm.click();
+                    closeWindow.click();
                     api.getCats()   /*обновляем котов после удаления */
                             .then(res => res.json())
                             .then(data => {
@@ -173,7 +215,6 @@ main.addEventListener("click", (e) => {
     closeInfoForm.addEventListener("click", () => {
         popupInfoForm.classList.remove("active");
         popupInfoForm.parentElement.classList.remove("active");
-        delCatBtn.removeEventListener("click", delThisCat);
         saveCatBtn.style.display = "none";
         editCatBtn.style.display = "flex";
         editCatBtn.removeEventListener("click", makeEdit)
@@ -189,6 +230,9 @@ main.addEventListener("click", (e) => {
             editCatBtn.style.display = "flex";
             editCatBtn.removeEventListener("click", makeEdit)
             saveCatBtn.removeEventListener("click", makeSave)
+            closeForm.classList.remove("active");
+            closeForm.parentElement.classList.remove("active");
+            delWindowBtn.removeEventListener("click", delThisCat);
         }
     });
 
@@ -201,6 +245,17 @@ main.addEventListener("click", (e) => {
             editCatBtn.style.display = "flex";
             editCatBtn.removeEventListener("click", makeEdit)
             saveCatBtn.removeEventListener("click", makeSave)
+            closeForm.classList.remove("active");
+            closeForm.parentElement.classList.remove("active");
+            delWindowBtn.removeEventListener("click", delThisCat);
+        }
+    });
+
+    closeWindowWrapper.addEventListener("click", (e) => {
+        if (e.target.classList.contains("close_window-wrapper")) {
+            closeForm.classList.remove("active");
+            closeForm.parentElement.classList.remove("active");
+            delWindowBtn.removeEventListener("click", delThisCat);
         }
     });
     

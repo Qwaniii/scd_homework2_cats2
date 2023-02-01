@@ -1,6 +1,6 @@
 // добавляем динамические данные с сервера
 
-let main = document.querySelector("main");
+const main = document.querySelector("main");
 
 const updCards = function (data) {
     main.innerHTML = "";
@@ -12,7 +12,7 @@ const updCards = function (data) {
             main.innerHTML += card;
         }
     });
-    let cards = document.getElementsByClassName("card");
+    const cards = document.getElementsByClassName("card");
     for (let i = 0, cnt = cards.length; i < cnt; i++) {
         const width = cards[i].offsetWidth;
         cards[i].style.height = width * 0.6 + "px";
@@ -23,10 +23,10 @@ const updCards = function (data) {
 
 // работает с popup окном добавление котика
 
-let addBtn = document.querySelector("#add");
-let popupForm = document.querySelector("#popup-form");
-let closePopupForm = document.querySelector(".popup-close");
-let popupWrapper = document.querySelector(".popup-wrapper")
+const addBtn = document.querySelector("#add"),
+      popupForm = document.querySelector("#popup-form"),
+      closePopupForm = document.querySelector(".popup-close"),
+      popupWrapper = document.querySelector(".popup-wrapper");
 
 addBtn.addEventListener("click", (e) => {
     e.preventDefault();

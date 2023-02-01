@@ -1,10 +1,10 @@
 // работа с popup окном Enter Login
 
-let addBtnEnter = document.querySelector("#login");
-let popupFormLogin = document.querySelector("#login-form");
-let closePopupFormLogin = document.querySelector(".login-close");
-let loginWrapper = document.querySelector(".login-wrapper")
-let outBtn = document.querySelector(".out");
+const addBtnEnter = document.querySelector("#login"),
+      popupFormLogin = document.querySelector("#login-form"),
+      closePopupFormLogin = document.querySelector(".login-close"),
+      loginWrapper = document.querySelector(".login-wrapper"),
+      outBtn = document.querySelector(".out");
 
 // Функция проверки существования Куки
 

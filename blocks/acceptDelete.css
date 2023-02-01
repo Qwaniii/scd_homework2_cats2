@@ -1,0 +1,96 @@
+/*   форма подтвержддения удаление котика */
+
+.close_window-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #0006;
+    z-index: 20;
+    display: none;
+}
+
+.close_window-wrapper.active {
+    display: flex;
+    animation-name: fade;
+    animation-duration: .2s;
+}
+
+@keyframes fade {
+    from {opacity: .1;}
+    to {opacity: 1;}
+}
+
+.close {
+    width: calc(100% - 150px);
+    max-height: calc(100% - 50px);
+    min-height: 150px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 2px 0 #0004;
+    position: relative;
+    display: none;
+    flex-direction: column;
+}
+
+.close.active {
+    display: block;
+    animation-name: fade;
+    animation-duration: .2s;
+}
+
+.window-close {
+    width: max-content;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close h2 {
+    font-size: 14px;
+    margin: 10px 0 10px;
+    text-align: center;
+}
+
+.close-form {
+    padding: 30px 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 70px);
+    gap: 15px;
+    justify-content: center;
+}
+
+.close-form button {
+    width: 70px;
+    justify-self: center;
+}
+
+.close-form button:hover {
+    color: #fff;
+    background-color: #0006
+}
+
+.close-window {
+    width: max-content;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#del {
+    font-weight: 600;
+    background-color: rgba(24, 24, 24, 0.4);
+}
+
+#del:hover {
+    background-color: rgba(247, 0, 0, 0.7);
+}
