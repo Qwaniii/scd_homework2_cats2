@@ -15,14 +15,14 @@
 
 .close_window-wrapper.active {
     display: flex;
-    animation-name: fade;
-    animation-duration: .2s;
+    /* animation-name: fade;
+    animation-duration: .2s; */
 }
 
-@keyframes fade {
+/* @keyframes fade {
     from {opacity: .1;}
     to {opacity: 1;}
-}
+} */
 
 .close {
     width: calc(100% - 150px);
@@ -42,22 +42,25 @@
 
 .close.active {
     display: block;
-    animation-name: fade;
-    animation-duration: .2s;
-}
-
-.window-close {
-    width: max-content;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+    /* animation-name: fade;
+    animation-duration: .2s; */
 }
 
 .close h2 {
     font-size: 14px;
     margin: 10px 0 10px;
     text-align: center;
+}
+
+.close i {
+    font-size: 1rem;
+}
+
+.close .btn {
+    min-width: 22px;
+    height: 22px;
+    box-shadow: 0 0 2px 0 #0002;
+    border-radius: 6px;
 }
 
 .close-form {
@@ -81,8 +84,8 @@
 .close-window {
     width: max-content;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 5px;
     cursor: pointer;
 }
 
@@ -94,3 +97,4 @@
 #del:hover {
     background-color: rgba(247, 0, 0, 0.7);
 }
+
